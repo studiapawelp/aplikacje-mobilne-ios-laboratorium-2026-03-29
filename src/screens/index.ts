@@ -1,4 +1,6 @@
 // Barrel file for all screens.
+export { AboutScreen } from './AboutScreen';
+export { AddProfessionalScreen } from './AddProfessionalScreen';
 export { HomeScreen } from './HomeScreen';
 export { LoginScreen } from './LoginScreen';
 export { OnboardingScreen } from './OnboardingScreen';

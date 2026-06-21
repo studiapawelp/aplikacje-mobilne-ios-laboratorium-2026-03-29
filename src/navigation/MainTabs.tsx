@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { HomeScreen, ProfileScreen, SearchScreen } from '../screens';
+import { AddProfessionalScreen, HomeScreen, ProfileScreen, SearchScreen } from '../screens';
 import { pl } from '../i18n';
 import { colors, fontSizes } from '../theme';
 import type { MainTabParamList } from './types';
@@ -15,10 +15,11 @@ const tabIcon = (
 ): keyof typeof Ionicons.glyphMap => {
   if (routeName === 'Services') return focused ? 'home' : 'home-outline';
   if (routeName === 'Search') return focused ? 'search' : 'search-outline';
+  if (routeName === 'Add') return focused ? 'add-circle' : 'add-circle-outline';
   return focused ? 'person' : 'person-outline';
 };
 
-// Bottom tab bar shown after login: Usługi, Wyszukaj, Profil.
+// Bottom tab bar shown after login: Usługi, Wyszukaj, Dodaj, Profil.
 export const MainTabs: React.FC = () => {
   return (
     <Tab.Navigator
@@ -45,6 +46,11 @@ export const MainTabs: React.FC = () => {
         name="Search"
         component={SearchScreen}
         options={{ title: pl.tabs.search }}
+      />
+      <Tab.Screen
+        name="Add"
+        component={AddProfessionalScreen}
+        options={{ title: pl.tabs.add }}
       />
       <Tab.Screen
         name="Profile"

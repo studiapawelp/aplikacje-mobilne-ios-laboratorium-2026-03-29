@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Card, Rating } from '../components';
+import { useApp } from '../context/AppContext';
 import { fetchProfessionalById } from '../data/api';
 import { pl } from '../i18n';
 import { colors, fontSizes, layout, radii, spacing } from '../theme';
@@ -48,11 +49,12 @@ export const ProfessionalDetailScreen: React.FC<
   AppStackScreenProps<'ProfessionalDetail'>
 > = ({ route }) => {
   const { id } = route.params;
+  const { professionals } = useApp();
 
   // Load the single professional by id (simulated async fetch).
   const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: ['professional', id],
-    queryFn: () => fetchProfessionalById(id),
+    queryKey: ['professional', id, professionals],
+    queryFn: () => fetchProfessionalById(id, professionals),
   });
 
   // Fake a phone call with a simple alert.

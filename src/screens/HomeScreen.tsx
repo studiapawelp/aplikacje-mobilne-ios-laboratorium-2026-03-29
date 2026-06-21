@@ -20,19 +20,19 @@ import type { MainTabScreenProps } from '../navigation/types';
 export const HomeScreen: React.FC<MainTabScreenProps<'Services'>> = ({
   navigation,
 }) => {
-  const { user } = useApp();
+  const { user, professionals, categories } = useApp();
   // Currently selected category name, or null for "Wszystkie".
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [query, setQuery] = useState('');
 
   // Load data through React Query so we get loading and error states.
   const professionalsQuery = useQuery({
-    queryKey: ['professionals'],
-    queryFn: fetchProfessionals,
+    queryKey: ['professionals', professionals],
+    queryFn: () => fetchProfessionals(professionals),
   });
   const categoriesQuery = useQuery({
-    queryKey: ['categories'],
-    queryFn: fetchCategories,
+    queryKey: ['categories', categories],
+    queryFn: () => fetchCategories(categories),
   });
 
   // Memoize the list so the empty array fallback stays stable across renders.

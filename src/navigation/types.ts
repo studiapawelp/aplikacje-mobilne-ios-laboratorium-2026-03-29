@@ -13,6 +13,7 @@ export type AuthStackParamList = {
 export type MainTabParamList = {
   Services: undefined;
   Search: undefined;
+  Add: undefined;
   Profile: undefined;
 };
 
@@ -21,6 +22,8 @@ export type AppStackParamList = {
   MainTabs: undefined;
   // Detail screen needs the professional id to load.
   ProfessionalDetail: { id: string };
+  // About / information screen.
+  About: undefined;
 };
 
 // Typed props helpers for each screen.

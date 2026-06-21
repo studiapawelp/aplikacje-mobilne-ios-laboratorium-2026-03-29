@@ -13,32 +13,51 @@ import { Button, Card } from '../components';
 import { useApp } from '../context/AppContext';
 import { pl } from '../i18n';
 import { colors, fontSizes, layout, radii, spacing } from '../theme';
+import type { MainTabScreenProps } from '../navigation/types';
 
 // One tappable settings row.
 interface SettingItem {
   id: string;
   icon: keyof typeof Ionicons.glyphMap;
   label: string;
+  action?: () => void;
 }
 
-const settingsItems: SettingItem[] = [
-  { id: 'edit', icon: 'person-outline', label: pl.profile.editProfile },
-  {
-    id: 'notifications',
-    icon: 'notifications-outline',
-    label: pl.profile.notifications,
-  },
-  { id: 'payments', icon: 'card-outline', label: pl.profile.payments },
-  { id: 'privacy', icon: 'lock-closed-outline', label: pl.profile.privacy },
-  { id: 'help', icon: 'help-circle-outline', label: pl.profile.help },
-];
-
-export const ProfileScreen: React.FC = () => {
+export const ProfileScreen: React.FC<MainTabScreenProps<'Profile'>> = ({
+  navigation,
+}) => {
   const { user, logout } = useApp();
 
-  // Settings are not implemented, so we show a friendly info alert.
-  const handleSettingPress = (label: string) => {
-    Alert.alert(label, pl.profile.comingSoon);
+  // Idzie do ekranu "O aplikacji".
+  const handleAbout = () => {
+    navigation.navigate('About');
+  };
+
+  const settingsItems: SettingItem[] = [
+    { id: 'edit', icon: 'person-outline', label: pl.profile.editProfile },
+    {
+      id: 'notifications',
+      icon: 'notifications-outline',
+      label: pl.profile.notifications,
+    },
+    { id: 'payments', icon: 'card-outline', label: pl.profile.payments },
+    { id: 'privacy', icon: 'lock-closed-outline', label: pl.profile.privacy },
+    {
+      id: 'about',
+      icon: 'information-circle-outline',
+      label: pl.about.title,
+      action: handleAbout,
+    },
+    { id: 'help', icon: 'help-circle-outline', label: pl.profile.help },
+  ];
+
+  // Jeśli element ma własną akcję, wykonaj ją; w przeciwnym razie alert.
+  const handleSettingPress = (item: SettingItem) => {
+    if (item.action) {
+      item.action();
+      return;
+    }
+    Alert.alert(item.label, pl.profile.comingSoon);
   };
 
   // Log out and let the navigator return to the auth flow.
@@ -72,7 +91,7 @@ export const ProfileScreen: React.FC = () => {
           {settingsItems.map((item, index) => (
             <Pressable
               key={item.id}
-              onPress={() => handleSettingPress(item.label)}
+              onPress={() => handleSettingPress(item)}
               accessibilityRole="button"
               style={({ pressed }) => [
                 styles.settingRow,

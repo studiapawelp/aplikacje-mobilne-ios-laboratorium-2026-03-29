@@ -92,9 +92,41 @@ export const pl = {
     logoutBody: 'Zostałeś wylogowany z konta.',
     comingSoon: 'Funkcja w przygotowaniu.',
   },
+  addProfessional: {
+    title: 'Dodaj fachowca',
+    subtitle: 'Wypełnij formularz, aby dodać nową osobę do katalogu.',
+    name: 'Imię i nazwisko',
+    namePlaceholder: 'np. Jan Nowak',
+    category: 'Kategoria',
+    city: 'Miasto',
+    cityPlaceholder: 'np. Warszawa',
+    priceFrom: 'Cena od (zł)',
+    experienceYears: 'Doświadczenie (lat)',
+    about: 'Opis',
+    aboutPlaceholder: 'Opisz świadczone usługi (min. 20 znaków)',
+    imageUrl: 'URL zdjęcia',
+    imageUrlPlaceholder: 'https://... (opcjonalne)',
+    submit: 'Dodaj fachowca',
+    successTitle: 'Dodano',
+    successBody: 'Nowy fachowiec został dodany do katalogu.',
+  },
+  about: {
+    title: 'O aplikacji',
+    appName: 'Fachowiec+',
+    description:
+      'Aplikacja umożliwia szybkie znalezienie sprawdzonych fachowców w Twojej okolicy. Przeglądaj kategorie, czytaj opinie, kontaktuj się bezpośrednio z wykonawcami i dodawaj nowe osoby do katalogu.',
+    version: 'Wersja 1.0.0',
+    technologies: 'Technologie',
+    techList:
+      'React Native · Expo · React Navigation · React Query · AsyncStorage · TypeScript',
+    features: 'Funkcjonalności',
+    featuresList:
+      'Przeglądanie katalogu fachowców · Wyszukiwanie po nazwie, kategorii, mieście · Filtrowanie po kategoriach · Ekran szczegółów z opiniami · Logowanie i rejestracja · Dodawanie nowych fachowców · Lokalna persystencja danych · Personalizowany profil',
+  },
   tabs: {
     services: 'Usługi',
     search: 'Wyszukaj',
+    add: 'Dodaj',
     profile: 'Profil',
   },
 } as const;

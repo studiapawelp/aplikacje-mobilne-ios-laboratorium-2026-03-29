@@ -18,6 +18,10 @@ interface Props {
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters';
   // Optional error message shown in red below the field.
   error?: string;
+  /** Render as a multi‑line TextInput (textarea). */
+  multiline?: boolean;
+  numberOfLines?: number;
+  maxLength?: number;
 }
 
 // Labeled text input used in the login and register forms.
@@ -30,12 +34,19 @@ export const FormField: React.FC<Props> = ({
   keyboardType = 'default',
   autoCapitalize = 'sentences',
   error,
+  multiline = false,
+  numberOfLines,
+  maxLength,
 }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
-        style={[styles.input, error ? styles.inputError : null]}
+        style={[
+          styles.input,
+          multiline && styles.inputMultiline,
+          error ? styles.inputError : null,
+        ]}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
@@ -44,6 +55,10 @@ export const FormField: React.FC<Props> = ({
         keyboardType={keyboardType}
         autoCapitalize={autoCapitalize}
         autoCorrect={false}
+        multiline={multiline}
+        numberOfLines={numberOfLines}
+        maxLength={maxLength}
+        textAlignVertical={multiline ? 'top' : 'center'}
       />
       {error ? <Text style={styles.error}>{error}</Text> : null}
     </View>
@@ -69,6 +84,11 @@ const styles = StyleSheet.create({
     height: 52,
     fontSize: fontSizes.bodyLarge,
     color: colors.textPrimary,
+  },
+  inputMultiline: {
+    height: 120,
+    paddingTop: spacing.md,
+    paddingBottom: spacing.md,
   },
   inputError: {
     borderColor: colors.danger,
